@@ -1,0 +1,35 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: KTM
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ktm
+    username: root
+    password: secret123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+#      DDL = Data Definition Language (DDL = CREATE, ALTER, DROP tables)
+      ddl-auto: update
+    show-sql: true
+#    Dialect = the way a database “speaks” SQL
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+
+logging:
+  file:
+    name: logs/app.log
+  logback:
+    rollingpolicy:
+      max-file-size: 3MB
+      max-history: 3
+  level:
+    root: INFO
+    org.springframework: WARN
+    com.yourpackage: DEBUG
+
+
