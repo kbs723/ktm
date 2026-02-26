@@ -2,10 +2,12 @@ package com.example.ktm.controller;
 
 import com.example.ktm.apireponse.ApiResponse;
 import com.example.ktm.constants.AppConst;
+import com.example.ktm.dto.AppUserDto;
 import com.example.ktm.entity.AppUser;
 import com.example.ktm.enums.Types;
-import com.example.ktm.exception.AppException;
+import com.example.ktm.markerInterface.Views;
 import com.example.ktm.service.AppUserService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,10 @@ public class AppUserController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse> create (@RequestBody AppUser appUser){
-        return ResponseEntity.ok(new ApiResponse(AppConst.OK, service.create(appUser), Types.ResponseType.SUCCESS));
+    @JsonView(Views.Create.class)
+    public ResponseEntity<ApiResponse> create (@RequestBody @JsonView(Views.Create.class) AppUserDto dto){
+        return ResponseEntity.ok(
+                new ApiResponse(AppConst.OK, service.create(dto), Types.ResponseType.SUCCESS));
     }
 
     @GetMapping
@@ -45,8 +49,10 @@ public class AppUserController {
     }
 
     @PutMapping("/{id}")
-    public AppUser put(@PathVariable long id, @RequestBody AppUser appUser) {
-         return service.update(id, appUser);
+    @JsonView(Views.Response.class)
+    public ResponseEntity<ApiResponse> put(@PathVariable long id, @RequestBody @JsonView(Views.Update.class) AppUserDto dto) {
+        return ResponseEntity.ok(
+                new ApiResponse(AppConst.OK, service.update(id, dto), Types.ResponseType.SUCCESS));
     }
 
     @DeleteMapping("/{id}")

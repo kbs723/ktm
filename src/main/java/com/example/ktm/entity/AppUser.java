@@ -1,7 +1,7 @@
 package com.example.ktm.entity;
 
 import com.example.ktm.util.PasswordUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrePersist;
@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 @Getter
 @Setter
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 public class AppUser extends BaseEntity{
 
     private String name;
@@ -25,13 +27,7 @@ public class AppUser extends BaseEntity{
     @Column(nullable = false)
     private String username;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
-
-    @PrePersist
-    @PreUpdate
-    public void encodePassword() {
-        this.password = PasswordUtil.encode(this.password);
-    }
 }

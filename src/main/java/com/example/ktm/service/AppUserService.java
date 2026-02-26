@@ -1,28 +1,33 @@
 package com.example.ktm.service;
 
+import com.example.ktm.dto.AppUserDto;
 import com.example.ktm.entity.AppUser;
+import com.example.ktm.mapper.AppUserMapper;
 import com.example.ktm.repo.AppUserRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AppUserService extends BaseEntityService<AppUser, Long> {
+public class AppUserService extends BaseEntityService<AppUser, AppUserDto, Long> {
 
-    private final AppUserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
-    protected AppUserService(JpaRepository<AppUser, Long> repository, AppUserRepository appUserRepository) {
-        super(repository);
-        this.repository = appUserRepository;
+    protected AppUserService(AppUserRepository repository, AppUserMapper mapper,
+                             PasswordEncoder passwordEncoder) {
+        super(repository, mapper);
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public AppUser create(AppUser user) {
-        return super.create(user);
+    public AppUserDto create(AppUserDto dto) {
+        // encrypt password manually
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+        return createDto(dto);
     }
 
-    public AppUser update(long id, AppUser user) {
-        return super.update(id, user);
+    public AppUserDto update(long id, AppUserDto user) {
+        return super.updateDto(id, user);
     }
 
     public void deleteById(long id) {
