@@ -1,12 +1,12 @@
-package com.example.ktm.controller;
+package com.example.ktm.appuser.ctrl;
 
 import com.example.ktm.apireponse.ApiResponse;
 import com.example.ktm.constants.AppConst;
-import com.example.ktm.dto.AppUserDto;
-import com.example.ktm.entity.AppUser;
+import com.example.ktm.appuser.dto.AppUserDto;
+import com.example.ktm.appuser.entity.AppUser;
 import com.example.ktm.enums.Types;
-import com.example.ktm.markerInterface.Views;
-import com.example.ktm.service.AppUserService;
+import com.example.ktm.fetchview.Views;
+import com.example.ktm.appuser.service.AppUserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,11 +22,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/app-users")
-public class AppUserController {
+public class AppUserCtrl {
 
     private final AppUserService service;
 
-    public AppUserController(AppUserService service) {
+    public AppUserCtrl(AppUserService service) {
         this.service = service;
     }
 
@@ -34,7 +34,7 @@ public class AppUserController {
     @JsonView(Views.Create.class)
     public ResponseEntity<ApiResponse> create (@RequestBody @JsonView(Views.Create.class) AppUserDto dto){
         return ResponseEntity.ok(
-                new ApiResponse(AppConst.OK, service.create(dto), Types.ResponseType.SUCCESS));
+                new ApiResponse(AppConst.OK, service.createDto(dto), Types.ResponseType.SUCCESS));
     }
 
     @GetMapping
@@ -44,7 +44,6 @@ public class AppUserController {
 
     @GetMapping("/{id}")
     public AppUser findById(@PathVariable long id) {
-//        throw new AppException(1001, "user", "Barani");
         return service.findById(id);
     }
 
@@ -52,7 +51,7 @@ public class AppUserController {
     @JsonView(Views.Response.class)
     public ResponseEntity<ApiResponse> put(@PathVariable long id, @RequestBody @JsonView(Views.Update.class) AppUserDto dto) {
         return ResponseEntity.ok(
-                new ApiResponse(AppConst.OK, service.update(id, dto), Types.ResponseType.SUCCESS));
+                new ApiResponse(AppConst.OK, service.updateDto(id, dto), Types.ResponseType.SUCCESS));
     }
 
     @DeleteMapping("/{id}")

@@ -1,14 +1,17 @@
-package com.example.ktm.dto;
+package com.example.ktm.appuser.dto;
 
-import com.example.ktm.markerInterface.Views;
+import com.example.ktm.common.dto.BaseEntityDto;
+import com.example.ktm.fetchview.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
-public class AppUserDto {
+@EqualsAndHashCode(callSuper = true)
+public class AppUserDto extends BaseEntityDto {
 
     @JsonView({Views.Create.class, Views.Update.class, Views.Response.class})
     @NotBlank
@@ -22,4 +25,8 @@ public class AppUserDto {
     @NotBlank
     private String password;
 
+    @JsonView({Views.Update.class})
+    @NotBlank
+    private String oldPassword;
 }
+

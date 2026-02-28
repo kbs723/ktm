@@ -1,11 +1,9 @@
-package com.example.ktm.entity;
+package com.example.ktm.appuser.entity;
 
-import com.example.ktm.util.PasswordUtil;
+import com.example.ktm.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +18,7 @@ import lombok.experimental.FieldNameConstants;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldNameConstants
-public class AppUser extends BaseEntity{
+public class AppUser extends BaseEntity {
 
     private String name;
 

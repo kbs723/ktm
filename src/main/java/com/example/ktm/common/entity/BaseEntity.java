@@ -1,17 +1,22 @@
-package com.example.ktm.entity;
+package com.example.ktm.common.entity;
 
 import com.example.ktm.enums.Status;
-import com.example.ktm.enums.Types;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
     @Id
@@ -20,7 +25,10 @@ public class BaseEntity {
 
     private Status.BaseStatus status = Status.BaseStatus.ACTIVE;
 
+    @CreatedDate
+    @Column(updatable = false)
     private Long createdAt;
 
+    @LastModifiedDate
     private Long updatedAt;
 }

@@ -1,17 +1,18 @@
-package com.example.ktm.service;
+package com.example.ktm.common.service;
 
 import java.util.List;
+import com.example.ktm.common.entity.BaseEntity;
+import com.example.ktm.common.mapper.BaseEntityMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.ktm.mapper.BaseMapper;
 
-public abstract class BaseEntityService<E, D, ID>{
+public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
 
     protected final JpaRepository<E, ID> repository;
-    protected final BaseMapper<E, D> mapper;
+    protected final BaseEntityMapper<E, D> mapper;
 
     protected BaseEntityService(
             JpaRepository<E, ID> repository,
-            BaseMapper<E, D> mapper) {
+            BaseEntityMapper<E, D> mapper) {
 
         this.repository = repository;
         this.mapper = mapper;
@@ -19,12 +20,14 @@ public abstract class BaseEntityService<E, D, ID>{
 
     /* ---------  For entity's ---------- */
     public E create(E entity) {
-        validateEntity(entity);
+        isNotNull(entity);
         return repository.save(entity);
     }
 
     public E update(E entity) {
-        validateEntity(entity);
+        isNotNull(entity);
+//        E existing = findById(entity);
+        validateEntity(null, entity);
         return repository.save(entity);
     }
 
@@ -37,11 +40,21 @@ public abstract class BaseEntityService<E, D, ID>{
         return repository.findAll();
     }
 
-    protected void validateEntity(E entity) {
+    protected void isNotNull(E entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
         }
     }
+
+    protected void validateEntity(E existing, E incoming) {
+        if (incoming == null) {
+            throw new IllegalArgumentException("Entity cannot be null");
+        }
+    }
+
+    protected void preCreate(E incoming) {}
+
+    protected void preUpdate(E existing, E incoming) {}
 
     /* ---------  For dto's ---------- */
     public D createDto(D dto) {
@@ -50,11 +63,10 @@ public abstract class BaseEntityService<E, D, ID>{
     }
 
     public D updateDto(ID id, D dto) {
-
         E existing = findById(id);
 
         // Update existing entity fields
-        mapper.updateEntityFromDto(dto, existing);
+        mapper.map(dto, existing);
 
         return mapper.toDto(update(existing));
     }

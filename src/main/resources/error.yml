@@ -9,3 +9,4 @@ errors:
   user:
     1001: "User {0} already exist !"
     1002: "Inactive user with id {0}"
+    1003: "Incorrect old password !"

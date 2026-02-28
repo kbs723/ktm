@@ -1,11 +1,12 @@
-package com.example.ktm.mapper;
+package com.example.ktm.common.mapper;
 
+import com.example.ktm.common.entity.BaseEntity;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
 import java.util.Set;
 
-public interface BaseMapper<E, D> {
+public interface BaseEntityMapper<E extends BaseEntity, D> {
 
     E toEntity(D dto);
 
@@ -15,5 +16,5 @@ public interface BaseMapper<E, D> {
 
     Set<D> toDtoSet(Set<E> set);
 
-    void updateEntityFromDto(D dto, @MappingTarget E entity);
+    void map(D dto, @MappingTarget E entity);
 }

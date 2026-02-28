@@ -1,7 +1,7 @@
 package com.example.ktm.apireponse;
 
 import com.example.ktm.enums.Types;
-import com.example.ktm.markerInterface.Views;
+import com.example.ktm.fetchview.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

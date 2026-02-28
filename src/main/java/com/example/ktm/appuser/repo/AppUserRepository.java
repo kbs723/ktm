@@ -1,7 +1,7 @@
-package com.example.ktm.repo;
+package com.example.ktm.appuser.repo;
 
 
-import com.example.ktm.entity.AppUser;
+import com.example.ktm.appuser.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
