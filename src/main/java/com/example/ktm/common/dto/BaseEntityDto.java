@@ -3,6 +3,8 @@ package com.example.ktm.common.dto;
 import com.example.ktm.enums.Status;
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
 public class BaseEntityDto {
 
@@ -10,7 +12,7 @@ public class BaseEntityDto {
 
     private Status.BaseStatus status;
 
-    private Long createdAt;
+    private Instant createdAt;
 
-    private Long updatedAt;
+    private Instant updatedAt;
 }
