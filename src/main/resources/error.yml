@@ -1,4 +1,6 @@
 errors:
+  internal:
+    1000: "An internal error !"
   generic:
     1000: "An unexpected error occurred. Please try again later."
     1001: "Invalid data: {0}"
@@ -6,7 +8,7 @@ errors:
     1003: "Session expired. Please log in again."
     1004: "Record not found with id {0}"
     1005: "Unsupported operation: {0}"
-  user:
+  appuser:
     1001: "User {0} already exist !"
     1002: "Inactive user with id {0}"
     1003: "Incorrect old password !"

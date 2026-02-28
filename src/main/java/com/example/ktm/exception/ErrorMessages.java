@@ -22,13 +22,13 @@ public class ErrorMessages {
      * @param params optional parameters for placeholders {0}, {1}...
      * @return formatted message
      */
-    public String getMessage(String category, String code, Object... params) {
+    public String getMessage(String category, int code, Object... params) {
         Map<String, String> categoryMap = errors.get(category);
         if (categoryMap == null){
             return "Unknown error";
         }
 
-        String template = categoryMap.get(code);
+        String template = categoryMap.get(String.valueOf(code));
         if (template == null) return "Unknown error";
 
         return MessageFormat.format(template, params);

@@ -4,8 +4,12 @@ public class AppConst {
 
     public static final String DEFAULT_ROLE = "USER";
     public static final int MAX_LOGIN_ATTEMPTS = 5;
-    public static final String UNKNOWN_ERROR_MSG = "An unknown error occurred. Please try again later.";
 
     // Response messages
     public static final String OK = "OK";
+
+    // Exception handling
+    public static final String LOG_EXCEPTION = "\"Exception : \"";
+    public static final String HANDLED_EXCEPTION = "Handled Exceptions";
+
 }

@@ -4,13 +4,12 @@ import com.example.ktm.common.dto.BaseEntityDto;
 import com.example.ktm.fetchview.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@Builder
 @EqualsAndHashCode(callSuper = true)
+//@Builder does NOT support inheritance properly.
 public class AppUserDto extends BaseEntityDto {
 
     @JsonView({Views.Create.class, Views.Update.class, Views.Response.class})

@@ -13,6 +13,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @MappedSuperclass
@@ -27,8 +29,8 @@ public class BaseEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    private Long createdAt;
+    private Instant createdAt;
 
     @LastModifiedDate
-    private Long updatedAt;
+    private Instant updatedAt;
 }

@@ -6,7 +6,8 @@ spring:
     name: KTM
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ktm
+#    force injection of UTC per db via spring config
+    url: jdbc:mysql://localhost:3306/your_db?serverTimezone=UTC
     username: root
     password: secret123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,10 +16,17 @@ spring:
     hibernate:
 #      DDL = Data Definition Language (DDL = CREATE, ALTER, DROP tables)
       ddl-auto: update
+
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
     show-sql: true
 #    Dialect = the way a database “speaks” SQL
     database-platform: org.hibernate.dialect.MySQLDialect
 
+  jackson:
+    time-zone: UTC
 
 logging:
   file:

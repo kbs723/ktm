@@ -6,5 +6,8 @@ public class Types {
         SUCCESS, ERROR, WARNING, INFO
     }
 
+    public enum Errors {
+        internal, generic, appuser
+    }
 
 }
