@@ -3,6 +3,7 @@ package com.example.ktm.common.service;
 import java.util.List;
 import com.example.ktm.common.entity.BaseEntity;
 import com.example.ktm.common.mapper.BaseEntityMapper;
+import com.example.ktm.exception.AppException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,14 +21,16 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
     }
 
     /* ---------  For entity's ---------- */
+    @Transactional
     public E create(E entity) {
         isNotNull(entity);
+        preCreate(entity);
         return repository.save(entity);
     }
 
+    @Transactional
     public E update(E entity) {
         isNotNull(entity);
-//        E existing = findById(entity);
         validateEntity(null, entity);
         return repository.save(entity);
     }
@@ -35,7 +38,7 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
     @Transactional(readOnly = true)
     public E findById(ID id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Entity not found"));
+                .orElseThrow(() -> new AppException(1004, "entity"));
     }
 
     @Transactional(readOnly = true)
@@ -49,44 +52,39 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
         }
     }
 
-    protected void validateEntity(E existing, E incoming) {
-        if (incoming == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
-        }
-    }
+    protected void validateEntity(E existing, E incoming) {}
 
     protected void preCreate(E incoming) {}
 
     protected void preUpdate(E existing, E incoming) {}
 
     /* ---------  For dto's ---------- */
+    @Transactional
     public D createDto(D dto) {
         E entity = mapper.toEntity(dto);
         return mapper.toDto(create(entity));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public D updateDto(ID id, D dto) {
         E existing = findById(id);
-
-        // Update existing entity fields
         mapper.map(dto, existing);
-
+        preUpdate(existing, existing);
         return mapper.toDto(update(existing));
     }
 
-    @Transactional(readOnly = true)
     public D findDtoById(ID id) {
         return mapper.toDto(findById(id));
     }
 
     public List<D> findAllDto() {
-        return repository.findAll()
+        return findAll()
                 .stream()
                 .map(mapper::toDto)
                 .toList();
     }
 
+    @Transactional
     public void deleteById(ID id) {
         repository.deleteById(id);
     }
