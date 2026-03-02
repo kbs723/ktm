@@ -8,15 +8,16 @@ spring:
     import: "classpath:errors.yml"
 
   datasource:
-#    force injection of UTC per db via spring config
+#   force injection of UTC per db via spring config
     primary:
       jdbc-url: jdbc:mysql://localhost:3306/ktm?serverTimezone=UTC
       username: root
       password: secret123
       driver-class-name: com.mysql.cj.jdbc.Driver
 
+#   self ref used for replica
     replica:
-      jdbc-url: jdbc:mysql://localhost:3307/ktm_replica?serverTimezone=UTC
+      jdbc-url: jdbc:mysql://localhost:3306/ktm?serverTimezone=UTC
       username: root
       password: secret123
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -48,5 +49,8 @@ logging:
     root: INFO
     org.springframework: WARN
     com.yourpackage: DEBUG
+
+    app:
+
 
 

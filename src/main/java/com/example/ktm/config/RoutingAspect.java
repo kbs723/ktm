@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Aspect
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class RoutingAspect {
 
     @Before("@annotation(transactional)")

@@ -39,8 +39,8 @@ public class AppUserCtrl {
     }
 
     @GetMapping
-    public List<AppUser> findAll() {
-        return service.findAll();
+    public ResponseEntity<List<AppUser>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
