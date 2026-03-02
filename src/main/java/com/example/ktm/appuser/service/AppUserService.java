@@ -31,9 +31,9 @@ public class AppUserService extends BaseEntityService<AppUser, AppUserDto, Long>
     }
 
     @Override
-    protected void preUpdate(AppUser existing, AppUser incoming) {
-        existing.setName(incoming.getName());
-        existing.setUsername(incoming.getUsername());
-        existing.setPassword(PasswordUtil.encode(incoming.getPassword()));
+    protected void preUpdate(AppUser snapshot, AppUser incoming) {
+        if (!PasswordUtil.match(incoming.getPassword(), snapshot.getPassword())) {
+            incoming.setPassword(PasswordUtil.encode(incoming.getPassword()));
+        }
     }
 }

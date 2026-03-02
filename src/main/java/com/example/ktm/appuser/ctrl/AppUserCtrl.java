@@ -9,6 +9,7 @@ import com.example.ktm.fetchview.Views;
 import com.example.ktm.appuser.service.AppUserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class AppUserCtrl {
 
     @PostMapping
     @JsonView(Views.Create.class)
-    public ResponseEntity<ApiResponse> create (@RequestBody @JsonView(Views.Create.class) AppUserDto dto){
+    public ResponseEntity<ApiResponse> create (@RequestBody @Validated(Views.Create.class) AppUserDto dto){
         return ResponseEntity.ok(
                 new ApiResponse(AppConst.OK, service.createDto(dto), Types.ResponseType.SUCCESS));
     }
@@ -49,7 +50,7 @@ public class AppUserCtrl {
 
     @PutMapping("/{id}")
     @JsonView(Views.Response.class)
-    public ResponseEntity<ApiResponse> put(@PathVariable long id, @RequestBody @JsonView(Views.Update.class) AppUserDto dto) {
+    public ResponseEntity<ApiResponse> put(@PathVariable long id, @RequestBody @Validated(Views.Update.class) AppUserDto dto) {
         return ResponseEntity.ok(
                 new ApiResponse(AppConst.OK, service.updateDto(id, dto), Types.ResponseType.SUCCESS));
     }

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-// configure data sources -> route them based on the
+// configure data sources -> route them based on the local thread
 public class DataSourceConfig {
 
     @Bean

@@ -29,16 +29,19 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
     }
 
     @Transactional
+    @SuppressWarnings("unchecked")
     public E update(E entity) {
         isNotNull(entity);
-        validateEntity(null, entity);
+        E existing = findById((ID) entity.getId());
+        validateEntity(existing, entity);
         return repository.save(entity);
     }
 
     @Transactional(readOnly = true)
     public E findById(ID id) {
         return repository.findById(id)
-                .orElseThrow(() -> new AppException(1004, "entity"));
+            .orElseThrow(() -> new AppException(1102, "entity", String.valueOf(id)
+        ));
     }
 
     @Transactional(readOnly = true)
@@ -48,7 +51,7 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
 
     protected void isNotNull(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
+            throw new AppException(1101, "generic");
         }
     }
 
@@ -68,8 +71,9 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
     @Transactional
     public D updateDto(ID id, D dto) {
         E existing = findById(id);
+        E snapshot = mapper.toEntity(mapper.toDto(existing));
         mapper.map(dto, existing);
-        preUpdate(existing, existing);
+        preUpdate(snapshot, existing);
         return mapper.toDto(update(existing));
     }
 
