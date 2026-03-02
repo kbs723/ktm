@@ -7,10 +7,17 @@ spring:
 
   datasource:
 #    force injection of UTC per db via spring config
-    url: jdbc:mysql://localhost:3306/ktm?serverTimezone=UTC
-    username: root
-    password: secret123
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    primary:
+      url: jdbc:mysql://localhost:3306/ktm?serverTimezone=UTC
+      username: root
+      password: secret123
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    replica:
+      url: jdbc:mysql://localhost:3307/ktm?serverTimezone=UTC
+      username: root
+      password: secret123
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:

@@ -1,6 +1,6 @@
 package com.example.ktm.common.dto;
 
-import com.example.ktm.enums.Status;
+import com.example.ktm.enummisc.Status;
 import lombok.Data;
 
 import java.time.Instant;

@@ -5,16 +5,14 @@ import com.example.ktm.appuser.dto.AppUserDto;
 import com.example.ktm.appuser.entity.AppUser;
 import com.example.ktm.exception.AppException;
 import com.example.ktm.appuser.mapper.AppUserMapper;
-import com.example.ktm.appuser.repo.AppUserRepository;
+import com.example.ktm.appuser.repo.AppUserRepo;
 import com.example.ktm.util.PasswordUtil;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AppUserService extends BaseEntityService<AppUser, AppUserDto, Long> {
 
-    protected AppUserService(AppUserRepository repository, AppUserMapper mapper) {
+    protected AppUserService(AppUserRepo repository, AppUserMapper mapper) {
         super(repository, mapper);
     }
 
@@ -37,17 +35,5 @@ public class AppUserService extends BaseEntityService<AppUser, AppUserDto, Long>
         existing.setName(incoming.getName());
         existing.setUsername(incoming.getUsername());
         existing.setPassword(PasswordUtil.encode(incoming.getPassword()));
-    }
-
-    public void deleteById(long id) {
-        super.deleteById(id);
-    }
-
-    public List<AppUser> findAll() {
-        return super.findAll();
-    }
-
-    public AppUser findById(long id) {
-        return super.findById(id);
     }
 }

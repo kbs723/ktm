@@ -1,4 +1,4 @@
-package com.example.ktm.enums;
+package com.example.ktm.enummisc;
 
 public class Types {
 
@@ -8,6 +8,11 @@ public class Types {
 
     public enum Errors {
         internal, generic, appuser
+    }
+
+    public enum DataSourceType {
+        PRIMARY,
+        REPLICA
     }
 
 }

@@ -4,7 +4,7 @@ import com.example.ktm.apireponse.ApiResponse;
 import com.example.ktm.constants.AppConst;
 import com.example.ktm.appuser.dto.AppUserDto;
 import com.example.ktm.appuser.entity.AppUser;
-import com.example.ktm.enums.Types;
+import com.example.ktm.enummisc.Types;
 import com.example.ktm.fetchview.Views;
 import com.example.ktm.appuser.service.AppUserService;
 import com.fasterxml.jackson.annotation.JsonView;

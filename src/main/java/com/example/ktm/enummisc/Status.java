@@ -1,4 +1,4 @@
-package com.example.ktm.enums;
+package com.example.ktm.enummisc;
 
 public class Status {
 

@@ -1,6 +1,6 @@
 package com.example.ktm.exception;
 
-import com.example.ktm.enums.Types;
+import com.example.ktm.enummisc.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

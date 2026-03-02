@@ -1,6 +1,6 @@
 package com.example.ktm.common.entity;
 
-import com.example.ktm.enums.Status;
+import com.example.ktm.enummisc.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;

@@ -4,6 +4,7 @@ import java.util.List;
 import com.example.ktm.common.entity.BaseEntity;
 import com.example.ktm.common.mapper.BaseEntityMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
 
@@ -31,11 +32,13 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
         return repository.save(entity);
     }
 
+    @Transactional(readOnly = true)
     public E findById(ID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entity not found"));
     }
 
+    @Transactional(readOnly = true)
     public List<E> findAll() {
         return repository.findAll();
     }
@@ -62,6 +65,7 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
         return mapper.toDto(create(entity));
     }
 
+    @Transactional(readOnly = true)
     public D updateDto(ID id, D dto) {
         E existing = findById(id);
 
@@ -71,6 +75,7 @@ public abstract class BaseEntityService<E extends BaseEntity, D, ID>{
         return mapper.toDto(update(existing));
     }
 
+    @Transactional(readOnly = true)
     public D findDtoById(ID id) {
         return mapper.toDto(findById(id));
     }

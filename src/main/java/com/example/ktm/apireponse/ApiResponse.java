@@ -1,6 +1,6 @@
 package com.example.ktm.apireponse;
 
-import com.example.ktm.enums.Types;
+import com.example.ktm.enummisc.Types;
 import com.example.ktm.fetchview.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
