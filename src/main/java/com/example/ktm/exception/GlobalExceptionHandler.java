@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleAllExceptions(Exception ex) {
 
-        // Get message from error.yml file
+        // Get message from errors.yml file
         String msg = errorMsg.getMessage(Types.Errors.internal.name(), 1000);
 
         ApiError error = ApiError.builder()
