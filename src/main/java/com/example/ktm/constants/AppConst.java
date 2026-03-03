@@ -11,5 +11,7 @@ public class AppConst {
     // Exception handling
     public static final String LOG_EXCEPTION = "\"Exception : \"";
     public static final String HANDLED_EXCEPTION = "Handled Exceptions";
+    public static final String REPLICA_NOT_CONFIG = "Replica not configured for OpsUnit - {}. Falling back to PRIMARY.";
+    public static final String JDBC_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
 }

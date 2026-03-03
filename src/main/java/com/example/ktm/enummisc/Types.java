@@ -11,8 +11,8 @@ public class Types {
     }
 
     public enum DataSourceType {
-        PRIMARY,
-        REPLICA
+        _PRIMARY,
+        _REPLICA
     }
 
 }
